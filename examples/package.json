@@ -1,0 +1,10 @@
+{
+  "name": "examples",
+  "private": true,
+  "workspaces": [
+    "example-monaco",
+    "example-monaco-demo",
+    "example-vite",
+    "example-vite-demo"
+  ]
+}

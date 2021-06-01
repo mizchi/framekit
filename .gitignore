@@ -109,3 +109,6 @@ dist
 .vscode-test
 
 
+
+# Local Netlify folder
+.netlify

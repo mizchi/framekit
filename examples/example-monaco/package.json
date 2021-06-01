@@ -1,0 +1,47 @@
+{
+  "name": "@mizchi/framekit-example-monaco",
+  "version": "0.0.1",
+  "module": "index.js",
+  "types": "types.d.ts",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run build:app && npm run build:client",
+    "build:app": "MODE=app vite build",
+    "build:client": "MODE=client vite build",
+    "serve": "vite preview",
+    "deploy": "npm run build && netlify deploy --prod -d app && npm publish"
+  },
+  "devDependencies": {
+    "@kvs/indexeddb": "^1.2.0",
+    "@rollup/plugin-replace": "^2.4.2",
+    "@sveltejs/vite-plugin-svelte": "^1.0.0-next.10",
+    "@types/lodash.sortby": "^4.7.6",
+    "@types/node": "^15.6.1",
+    "@types/react": "^17.0.8",
+    "@types/react-dom": "^17.0.5",
+    "monaco-editor": "^0.24.0",
+    "netlify-cli": "^3.32.5",
+    "path-browserify": "^1.0.1",
+    "svelte": "^3.38.2",
+    "svelte-preprocess": "^4.7.3",
+    "typescript": "^4.2.3",
+    "vite": "^2.3.4"
+  },
+  "dependencies": {
+    "@chakra-ui/react": "^1.6.3",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@mizchi/framekit": "^0.0.1",
+    "comlink": "^4.3.1",
+    "framer-motion": "^4",
+    "immer": "^9.0.2",
+    "lodash.sortby": "^4.7.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0"
+  },
+  "files": [
+    "dist",
+    "types.d.ts"
+  ]
+}

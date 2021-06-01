@@ -1,10 +1,5 @@
-import type { ApiBase } from "./framekit";
-
-export interface Api extends ApiBase {
-  init(): Promise<void>;
-  run(): Promise<void>;
-}
-
+import type { Api } from "../types";
+import { expose, windowEndpoint } from "comlink";
 export const api: Api = {
   async init() {
     setInterval(() => {
@@ -18,3 +13,5 @@ export const api: Api = {
     return true;
   },
 };
+
+expose(api, windowEndpoint(self.parent));
