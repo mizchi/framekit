@@ -1,5 +1,8 @@
 import type { ApiBase } from "@mizchi/framekit";
 
 export interface Api extends ApiBase {
-  init(opts: { files: { [k: string]: string } }): Promise<void>;
+  init(
+    initialFiles: { [k: string]: string },
+    onChangeContent: (filepath: string, content: string) => void
+  ): Promise<void>;
 }

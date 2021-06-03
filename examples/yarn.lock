@@ -1608,6 +1608,13 @@
   resolved "https://registry.yarnpkg.com/@mizchi/framekit/-/framekit-0.0.1.tgz#95b163b2200971cbacc1d8182ba433f10865f718"
   integrity sha512-w7ZBUTZeN2YWfEXn2NDwVmO06J16w5/8MGEptXHhzYJ2KHq+hVr4y3OUiJR3bkQnKiabH+NHFS/kQmq9iCh9xA==
 
+"@mizchi/framekit@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@mizchi/framekit/-/framekit-0.0.7.tgz#b027ec377c0266f123d4f84443bb5381099bd929"
+  integrity sha512-yUTFQ3znH8KKjJLxbbEek3MbzdEskDo5S7GmsleRuXzmA9AtN2U1DyArEV/AB/eb0BPd5gG4jx/7RIvlnuXUPw==
+  optionalDependencies:
+    svelte "^3.38.2"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"

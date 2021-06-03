@@ -1,6 +1,7 @@
 import pkg from "./package.json";
 import { defineConfig } from "vite";
 import replace from "@rollup/plugin-replace";
+import svelte from "@sveltejs/vite-plugin-svelte";
 
 export default defineConfig({
   build:
@@ -16,6 +17,7 @@ export default defineConfig({
           },
         },
   plugins: [
+    svelte(),
     replace({
       "process.env.VERSION": JSON.stringify(pkg.name),
       "process.env.DEFAULT_URL": JSON.stringify(process.env.DEFAULT_URL),

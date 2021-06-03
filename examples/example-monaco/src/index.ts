@@ -5,13 +5,15 @@ import ReactDOM from "react-dom";
 import { expose, windowEndpoint } from "comlink";
 
 export const api: Api = {
-  async init(opts) {
+  async init(initialFiles, onChangeContent) {
     const el = document.createElement("div");
     el.style.width = "100%";
     el.style.height = "100%";
     document.body.appendChild(el);
-    ReactDOM.render(React.createElement(App, { initialFiles: opts.files }), el);
-    console.log("init");
+    ReactDOM.render(
+      React.createElement(App, { initialFiles, onChangeContent }),
+      el
+    );
   },
   async ready() {
     return true;

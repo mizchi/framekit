@@ -5,23 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Demo App</title>
   </head>
-  <body>
-    <script type="module">
-      import { create } from "@mizchi/framekit";
-      const files = { "/index.tsx": "import foo from './foo';\nconsole.log(foo);", "/foo.ts": "export default 1", };
-      (async () => {
-        const {element, render} = await create({
-          // for development
-          // url: "/",
-          // for production
-          url: "https://naughty-swirles-79db81.netlify.app/"
-        });
-        element.style.width = "800px";
-        element.style.height = "500px";
-        // element.style.background = "wheat";
-        const api = await render(document.body);
-        await api.init({files});
-      })().catch(console.error);
-    </script>
+  <body style="height: 200vh">
+    <script type="module" src="./dev.ts"></script>
   </body>
 </html>
