@@ -2,7 +2,7 @@
   "name": "@mizchi/framekit-example-vite",
   "version": "0.0.1",
   "module": "index.js",
-  "types": "types.d.ts",
+  "types": "api.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "npm run build:app && npm run build:client",
@@ -15,6 +15,7 @@
     "access": "public"
   },
   "devDependencies": {
+    "@mizchi/framekit": "file:../../",
     "@rollup/plugin-replace": "^2.4.2",
     "@types/node": "^15.6.1",
     "netlify-cli": "^3.32.5",
@@ -22,11 +23,10 @@
     "vite": "^2.3.4"
   },
   "dependencies": {
-    "@mizchi/framekit": "^0.0.1",
     "comlink": "^4.3.1"
   },
   "files": [
     "dist",
-    "types.d.ts"
+    "api.d.ts"
   ]
 }

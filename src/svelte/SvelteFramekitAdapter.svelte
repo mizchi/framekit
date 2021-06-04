@@ -1,10 +1,10 @@
+<!-- WIP: core not included -->
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
   import { create } from "../core";
   export let width: string = "100%";
   export let height: string = "100%";
   export let url: string;
-
   const dispatch =
     createEventDispatcher<{
       apiready: {
@@ -12,12 +12,12 @@
       };
     }>();
 
-  let parent: HTMLElement | null = null;
+  let parent: HTMLElement;
   let loading: boolean = true;
 
   let initialized = false;
 
-  $: if (!initialized && parent != null) {
+  $: if (parent && !initialized) {
     initialized = true;
     (async () => {
       loading = true;

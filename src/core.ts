@@ -1,19 +1,21 @@
 import type { Remote } from "comlink";
-import { wrap, windowEndpoint } from "comlink";
+import { wrap, windowEndpoint, expose } from "comlink";
 
 export type ApiBase = {
-  ready(): Promise<boolean>;
+  __ready__(): Promise<boolean>;
+  __standalone__: () => Promise<void>;
   [key: string]: (...args: Array<any>) => Promise<any>;
 };
-
 export async function attachWidgetApi<T extends ApiBase>(config: {
   element: HTMLIFrameElement;
   url: string;
+  sandbox?: string;
 }): Promise<Remote<T>> {
   const element =
     config.element ??
     createWidgetElement({
       url: config.url,
+      sandbox: config.sandbox,
     });
   await new Promise((r) => (element.onload = r));
   return wrap<T>(windowEndpoint(element.contentWindow!));
@@ -21,10 +23,13 @@ export async function attachWidgetApi<T extends ApiBase>(config: {
 
 export function createWidgetElement(config: {
   url: string;
+  sandbox?: string;
 }): HTMLIFrameElement {
   const element = document.createElement("iframe");
   element.style.border = "none";
   element.style.padding = "0";
+  // @ts-ignore
+  element.sandbox = config.sandbox ?? "allow-scripts";
   element.src = config.url;
   return element;
 }
@@ -38,8 +43,11 @@ export async function ensureApiReady<T extends ApiBase>(
       if (element.contentWindow) {
         const api = wrap<T>(windowEndpoint(element.contentWindow!));
         try {
-          await api.ready();
-          r(api);
+          const isReady = await api.__ready__();
+          if (isReady) {
+            r(api);
+            return;
+          }
         } catch (err) {
           console.error(err);
           setTimeout(loop, 100);
@@ -52,7 +60,10 @@ export async function ensureApiReady<T extends ApiBase>(
   });
 }
 
-export async function create<T extends ApiBase>(config: { url: string }) {
+export async function create<T extends ApiBase>(config: {
+  url: string;
+  sandbox?: string;
+}) {
   const element = createWidgetElement(config);
   return {
     element,
@@ -61,4 +72,13 @@ export async function create<T extends ApiBase>(config: { url: string }) {
       return await ensureApiReady<T>(element);
     },
   };
+}
+
+export async function exposeIframe<T extends ApiBase = any>(api: T) {
+  // standalone
+  if (window.parent !== window) {
+    expose(api, windowEndpoint(self.parent));
+  } else {
+    api.__standalone__?.();
+  }
 }

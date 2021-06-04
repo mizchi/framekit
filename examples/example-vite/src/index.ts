@@ -1,17 +1,24 @@
-import type { Api } from "../types";
-import { expose, windowEndpoint } from "comlink";
+import type { Api } from "../api";
+import { exposeIframe } from "@mizchi/framekit";
+
 export const api: Api = {
-  async init() {
+  async init(base: number, callback: (now: number) => void) {
+    // // worker test
+    // const mod = await import("./on_worker?worker&inline");
+    // new mod.default();
     setInterval(() => {
-      document.body.innerHTML = Date.now().toString();
+      const delta = Date.now() - base;
+      document.body.innerHTML = delta.toString();
+      callback(delta);
     }, 1000);
   },
-  async run() {
-    console.log("ran!");
-  },
-  async ready() {
+  async __ready__() {
     return true;
+  },
+  async __standalone__() {
+    // as host
+    api.init(0, console.log);
   },
 };
 
-expose(api, windowEndpoint(self.parent));
+exposeIframe(api);

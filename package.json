@@ -1,8 +1,7 @@
 {
   "name": "@mizchi/framekit",
-  "version": "0.0.7",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.3",
+  "description": "connect iframe as rpc",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -21,14 +20,11 @@
     "svelte-preprocess": "^4.7.3",
     "typescript": "^4.3.2"
   },
-  "optionalDependencies": {
-    "svelte": "*"
-  },
   "peerDependencies": {
     "comlink": "*"
   },
   "files": [
     "dist",
-    "src/svelte"
+    "src"
   ]
 }

@@ -1,6 +1,5 @@
 import type { ApiBase } from "@mizchi/framekit";
 
 export interface Api extends ApiBase {
-  init(): Promise<void>;
-  run(): Promise<void>;
+  init(base: number, callback: (now: number) => void): Promise<void>;
 }

@@ -8,19 +8,18 @@
   <body>
     <script type="module">
       import { create } from "@mizchi/framekit";
+      import { proxy } from "comlink";
       (async () => {
         const {element, render} = await create({
-          // for development
-          // url: "/",
-          // for production
-          url: "https://naughty-swirles-79db81.netlify.app/"
+          url: "/",
+          sandbox: "allow-scripts allow-same-origin"
         });
-        element.style.width = "500px";
-        element.style.height = "500px";
-        element.style.background = "wheat";
+        element.style.width = "160px";
+        element.style.height = "40px";
+        element.style.outline = "1px solid black";
         const api = await render(document.body);
-        await api.init();
-        await api.run();
+        // wrap function with comlink proxy
+        await api.init(Date.now(), proxy((delta) => {console.log('delta', delta)}));
       })().catch(console.error);
     </script>
   </body>
