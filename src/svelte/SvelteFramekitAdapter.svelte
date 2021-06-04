@@ -5,6 +5,7 @@
   export let width: string = "100%";
   export let height: string = "100%";
   export let url: string;
+  export let sandbox: string | undefined = undefined;
   const dispatch =
     createEventDispatcher<{
       apiready: {
@@ -23,6 +24,7 @@
       loading = true;
       const { element, render } = await create({
         url,
+        sandbox,
       });
       element.style.width = "100%";
       element.style.height = "100%";
